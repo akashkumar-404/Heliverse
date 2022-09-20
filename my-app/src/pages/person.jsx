@@ -35,6 +35,8 @@ const [teams,setTeam]=useState([]);
   useEffect(()=>{
     let filterPerson={
       params:{domain:search.getAll("domain"),
+      gender:search.getAll("gender"),
+      available:search.getAll('available'),
        _page:currentPage,
        _limit:20
     }
@@ -42,6 +44,9 @@ const [teams,setTeam]=useState([]);
   
     dispatch(getPerson(filterPerson))
   },[location.search,currentPage])
+
+
+console.log(search.getAll('available'))
 
 const handleteam=(item)=>{
     let a=item.domain

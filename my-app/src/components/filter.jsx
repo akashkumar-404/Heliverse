@@ -146,13 +146,13 @@ useEffect(() => {
         <h3>Available</h3>
         <div style={{backgroundColor:'#CCCCFF', borderRadius:'15px'}}>
          <div>
-          <input type="checkbox" value="available" 
+          <input type="checkbox" value="true" 
           checked={category2.includes("true")}
           onChange={handleChekBox2}/>
           <label>Available</label>
         </div>
         <div>
-          <input type="checkbox" value="available" 
+          <input type="checkbox" value="false" 
           checked={category2.includes("false")}
           onChange={handleChekBox2}/>
           <label>Not Available</label>
