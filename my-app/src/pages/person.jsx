@@ -67,17 +67,6 @@ const handleteam=(item)=>{
     
 }
 
-
-//console.log(person)
-//   useEffect(()=>{
-    
-//     console.log(person.length)
-//   },[])
-// const indexOfLastRecord = currentPage * recordsPerPage;
-//     const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
-//     const currentRecords =person.slice(indexOfFirstRecord, indexOfLastRecord);
-//     const nPages = Math.ceil(persom.length / recordsPerPage)
-//console.log(person)
   return (
     <>
    
