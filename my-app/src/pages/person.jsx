@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link,useLocation,  useSearchParams } from "react-router-dom";
 import Filter from "../components/filter";
 import addData, { getPerson } from "../redux/action";
-import {Card, Paper} from "@mui/material"
+import {Button, Card, Grid, Paper} from "@mui/material"
 
 import axios from "axios";
 import Teams from "./teams";
+import { Searchbar } from "../components/searchbar";
 
 
 const Person = () => {
@@ -18,7 +19,7 @@ const Person = () => {
   const [recordsPerPage] = useState(20);
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true);
-const [team,setTeam]=useState([]);
+const [teams,setTeam]=useState([]);
 
 //   useEffect(() => {
 //     axios.get('http://localhost:3005/profile')
@@ -44,16 +45,18 @@ const [team,setTeam]=useState([]);
 
 const handleteam=(item)=>{
     let a=item.domain
-    let array=team.filter(function(el){
+    let array=teams.filter(function(el){
         return el.domain==a
     })
-    if(array.length==0){
-        setTeam([...team,item])
-        dispatch(addData(team))
-        console.log(team)
+    if(array.length==0 && item.available==true ){
+        //setTeam(...teams,item)
+       teams.push(item)
+        console.log(teams.length)
+        dispatch(addData(teams))
+        console.log(teams)
     }
     else{
-        alert('already added domain')
+        alert('user not avilable')
     }
 
     
@@ -72,28 +75,35 @@ const handleteam=(item)=>{
 //console.log(person)
   return (
     <>
-    <div style={{display:"flex" }}>
+   
+    <div style={{display:"flex",marginTop:"100px"}}>
         <Filter />
-      <div style={{marginLeft:"50px"}}>
+      <div style={{width:'70%',marginLeft:'60px'}}>
       
         
-        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"20px"}}>{
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }} >{
           
           person&&person.map((item)=>
-          <Paper sx={{ bgcolor: "deepPurple[500]" }} elevation={3}>
+          <Grid item xs={2} sm={4} md={4} >
+          <Paper sx={{ bgcolor: "deepPurple[500]" }} style={{backgroundColor:'gray'}} elevation={3}>
+            <div style={{backgroundColor:'white'}}>
                  <img src={item.avatar} style={{width:"200px"}}/>
-                  <p>{item.first_name} {" "}{item.last_name}</p>
+                 </div>
+                  <h4>{item.first_name} {" "}{item.last_name}</h4>
                   <p>{item.gender}</p>
                   <p>{item.email}</p>
-                  <p>{item.domain}</p>
-                  <button onClick={()=>handleteam(item)}>ADD</button>
+                  <p>Domain:{' '}{item.domain}</p>
+                  <Button style={{padding:"5px",color:"white",backgroundColor:"blue"}} variant="contained" onClick={()=>handleteam(item)}>ADD</Button>
                   
               </Paper>
+              </Grid>
          )
-        }</div>
-        <button disabled={currentPage===1} onClick={()=>setCurrentPage(currentPage-1)}>Prev</button>
-        <button>{currentPage}</button>
-        <button disabled={currentPage===50} onClick={()=>setCurrentPage(currentPage+1)}>Next</button>
+        }</Grid>
+        <div style={{marginTop:'25px'}}>
+        <Button style={{padding:"15px",color:"white",backgroundColor:"#008080"}} variant="contained" disabled={currentPage===1} onClick={()=>setCurrentPage(currentPage-1)}>Prev</Button>
+        <Button>{currentPage}</Button>
+        <Button style={{padding:"15px",color:"white",backgroundColor:"#008080"}} variant="contained" disabled={currentPage===50} onClick={()=>setCurrentPage(currentPage+1)}>Next</Button>
+        </div>
       </div>
       
     </div>

@@ -9,8 +9,10 @@ const Teams = () => {
     <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:"20px"}}>{
           
         teams&&teams.map((item)=>
-        <Paper sx={{ bgcolor: "deepPurple[500]" }} elevation={3}>
+        <Paper sx={{ bgcolor: "deepPurple[500]" }} elevation={3} style={{backgroundColor:'gray',paddingBottom:'30px'}}>
+            <div style={{backgroundColor:'white'}}>
                <img src={item.avatar} style={{width:"200px"}}/>
+               </div>
                 <p>{item.first_name} {" "}{item.last_name}</p>
                 <p>{item.gender}</p>
                 <p>{item.email}</p>
